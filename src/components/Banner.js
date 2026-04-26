@@ -5,19 +5,15 @@ import cvFile from "../assets/cv/Yosra_YaakoubV2.pdf";
 import { ArrowRightCircle, Download } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-
+const toRotate = [
+  "Full-Stack Developer",
+  "React.js Developer",
+  "Web & Mobile Developer",
+];
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
-
-  const toRotate = [
-    "Full-Stack Developer",
-    "React.js Developer",
-    "Web & Mobile Developer",
-  ];
-
-  const period = 2000;
 
   // ✅ FIX: useCallback pour éviter warning
   const tick = useCallback(() => {
