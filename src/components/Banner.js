@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/YosraPhoto.png";
-import cvFile from "../assets/cv/Yosra_Yaakoub  V2.pdf";
+import cvFile from "../assets/cv/Yosra_YaakoubV2.pdf";
 import { ArrowRightCircle, Download } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
