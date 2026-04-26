@@ -6,8 +6,7 @@ import navIcon2 from "../assets/img/icons-github-logo.png";
 import navIcon3 from "../assets/img/icons-gmail.png";
 
 export const NavBar = () => {
-  const [activeLink, setActiveLink] = useState("home");
-  const [activeIcon, setActiveIcon] = useState("");
+  const [activeLink, setActiveLink] = useState("");
 
   // ✨ animation text logo
   const [text, setText] = useState("");

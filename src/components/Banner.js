@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/YosraPhoto.png";
 import cvFile from "../assets/cv/Yosra_Yaakoub  V2.pdf";
@@ -10,7 +10,6 @@ export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
-  const [delta, setDelta] = useState(300 - Math.random() * 100);
 
   const toRotate = [
     "Full-Stack Developer",
@@ -20,15 +19,8 @@ export const Banner = () => {
 
   const period = 2000;
 
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => clearInterval(ticker);
-  }, [text]);
-
-  const tick = () => {
+  // ✅ FIX: useCallback pour éviter warning
+  const tick = useCallback(() => {
     let i = loopNum % toRotate.length;
     let fullText = toRotate[i];
 
@@ -38,19 +30,19 @@ export const Banner = () => {
 
     setText(updatedText);
 
-    if (isDeleting) {
-      setDelta((prev) => prev / 2);
-    }
-
     if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(period);
+      setTimeout(() => setIsDeleting(true), 800);
     } else if (isDeleting && updatedText === "") {
       setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(500);
+      setLoopNum((prev) => prev + 1);
     }
-  };
+  }, [text, isDeleting, loopNum]);
+
+  // ✅ FIX propre (plus de warning ESLint)
+  useEffect(() => {
+    const ticker = setInterval(tick, isDeleting ? 80 : 120);
+    return () => clearInterval(ticker);
+  }, [tick, isDeleting]);
 
   return (
     <section className="banner" id="home">
